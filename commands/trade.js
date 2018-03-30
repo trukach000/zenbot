@@ -11,6 +11,7 @@ var tb = require('timebucket')
   , z = require('zero-fill')
   , cliff = require('cliff')
   , output = require('../lib/output')
+  , restapi = require('../lib/rest_api')
   , objectifySelector = require('../lib/objectify-selector')
   , engineFactory = require('../lib/engine')
   , collectionService = require('../lib/services/collection-service')
@@ -429,6 +430,7 @@ module.exports = function (program, conf) {
               var head = '------------------------------------------ INITIALIZE  OUTPUT ------------------------------------------'
               console.log(head)
               output(conf).initializeOutput(s)
+              restapi(conf).initializeRestApi(s,engine)
               var minuses = Math.floor((head.length - so.mode.length - 19) / 2)
               console.log('-'.repeat(minuses) + ' STARTING ' + so.mode.toUpperCase() + ' TRADING ' + '-'.repeat(minuses + (minuses % 2 == 0 ? 0 : 1)))
               if (so.mode === 'paper') {

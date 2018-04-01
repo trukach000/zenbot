@@ -34,7 +34,7 @@ module.exports = function api () {
         return
       }
       var trades = collectionServiceInstance.getTrades()
-      res.send(JSON.stringify(trades)
+      res.send(JSON.stringify(trades))
     })
 
     app.post('/buyLimit', function (req, res) {

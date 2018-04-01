@@ -34,10 +34,10 @@ module.exports = function api () {
         res.send('{"status":"Backfilling"}')
         return
       }
-      var trades = collectionServiceInstance.getTrades()
-      console.log(util.inspect(trades, false, null))
+      var myTrades = collectionServiceInstance.getMyTrades()
+      console.log(util.inspect(myTrades, false, null))
 
-      res.send(JSON.stringify(trades))
+      res.send(JSON.stringify(myTrades))
     })
 
     app.post('/buyLimit', function (req, res) {

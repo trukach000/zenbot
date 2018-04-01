@@ -3,6 +3,7 @@ module.exports = function api () {
   let app = express() 
   let collectionService = require('../../lib/services/collection-service')
   let isBackFilled = false;
+  const util = require('util')
 
   let run = function(conf ,reporter, tradeObject, engine) {
 
@@ -34,6 +35,8 @@ module.exports = function api () {
         return
       }
       var trades = collectionServiceInstance.getTrades()
+      console.log(util.inspect(trades, false, null))
+
       res.send(JSON.stringify(trades))
     })
 

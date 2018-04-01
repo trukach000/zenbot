@@ -102,7 +102,8 @@ module.exports = function api () {
   }
 
   return {
-    run: run
+    run: run,
+    backFilled: backFilled 
   }
 }
 

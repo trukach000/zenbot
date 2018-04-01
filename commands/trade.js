@@ -381,7 +381,8 @@ module.exports = function (program, conf) {
       var my_trades = collectionServiceInstance.getMyTrades()
       var periods = collectionServiceInstance.getPeriods()
 
-      restapi(conf).initializeRestApi(s,engine)
+      var restApi = restapi(conf)
+      restApi.initializeRestApi(s,engine)
 
       console.log('fetching pre-roll data:')
       var zenbot_cmd = process.platform === 'win32' ? 'zenbot.bat' : 'zenbot.sh' // Use 'win32' for 64 bit windows too
@@ -434,7 +435,7 @@ module.exports = function (program, conf) {
               var head = '------------------------------------------ INITIALIZE  OUTPUT ------------------------------------------'
               console.log(head)
               output(conf).initializeOutput(s)
-              
+              restApi.backFilled()
               var minuses = Math.floor((head.length - so.mode.length - 19) / 2)
               console.log('-'.repeat(minuses) + ' STARTING ' + so.mode.toUpperCase() + ' TRADING ' + '-'.repeat(minuses + (minuses % 2 == 0 ? 0 : 1)))
               if (so.mode === 'paper') {

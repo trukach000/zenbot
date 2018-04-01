@@ -185,7 +185,7 @@ module.exports = function (program, conf) {
           trade_per_day: n(s.my_trades.length / s.day_count).format('0.00')
         }
 
-        restapi(conf).initializeRestApi(s,engine)
+        
 
         var last_buy
         var losses = 0, sells = 0
@@ -380,6 +380,8 @@ module.exports = function (program, conf) {
       var my_trades_size = 0
       var my_trades = collectionServiceInstance.getMyTrades()
       var periods = collectionServiceInstance.getPeriods()
+
+      restapi(conf).initializeRestApi(s,engine)
 
       console.log('fetching pre-roll data:')
       var zenbot_cmd = process.platform === 'win32' ? 'zenbot.bat' : 'zenbot.sh' // Use 'win32' for 64 bit windows too

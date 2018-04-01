@@ -1,7 +1,7 @@
 module.exports = function api () {
   let express = require('express')
   let app = express() 
-  let collectionService = require('../lib/services/collection-service')
+  let collectionService = require('../../lib/services/collection-service')
   let isBackFilled = false;
 
   let run = function(conf ,reporter, tradeObject, engine) {

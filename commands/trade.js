@@ -185,6 +185,8 @@ module.exports = function (program, conf) {
           trade_per_day: n(s.my_trades.length / s.day_count).format('0.00')
         }
 
+        restapi(conf).initializeRestApi(s,engine)
+
         var last_buy
         var losses = 0, sells = 0
         s.my_trades.forEach(function (trade) {
@@ -430,7 +432,7 @@ module.exports = function (program, conf) {
               var head = '------------------------------------------ INITIALIZE  OUTPUT ------------------------------------------'
               console.log(head)
               output(conf).initializeOutput(s)
-              restapi(conf).initializeRestApi(s,engine)
+              
               var minuses = Math.floor((head.length - so.mode.length - 19) / 2)
               console.log('-'.repeat(minuses) + ' STARTING ' + so.mode.toUpperCase() + ' TRADING ' + '-'.repeat(minuses + (minuses % 2 == 0 ? 0 : 1)))
               if (so.mode === 'paper') {

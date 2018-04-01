@@ -1,8 +1,10 @@
 module.exports = function api () {
   let express = require('express')
-  let app = express()
+  let app = express() 
+  let collectionService = require('../lib/services/collection-service')
+  let isBackFilled = false;
 
-  let run = function(reporter, tradeObject, engine) {
+  let run = function(conf ,reporter, tradeObject, engine) {
 
     startServer(reporter.port, reporter.ip, tradeObject, engine)
     
@@ -14,46 +16,83 @@ module.exports = function api () {
     return otherKeys
   }
 
-  let startServer = function(port, ip, tradeObject, engine) {
+  let backFilled = function(){
+    isBackFilled  = true;
+  }
+
+  let startServer = function(conf, port, ip, tradeObject, engine) {
     tradeObject.port = port
 
+    var collectionServiceInstance = collectionService(conf)
 
-    app.get('/test', function (req, res) {
-      res.send(objectWithoutKey(tradeObject, 'options'))
+    app.get('/ready', function (req, res) {
+      console.log('Get trades:\n')
+      if(!isBackFilled){
+        res.send('{"status":"Backfilling"}')
+        return
+      }
+      res.send(trades)
+    })
+
+
+    app.get('/trades', function (req, res) {
+      console.log('Get trades:\n')
+      if(!isBackFilled){
+        res.send('{"status":"Backfilling"}')
+        return
+      }
+      res.send(trades)
     })
 
     app.post('/buyLimit', function (req, res) {
-      console.log('Buy by Limit: ')
+      console.log('Buy by Limit: \n')
+      if(!isBackFilled){
+        res.send('{"status":"Backfilling"}')
+        return
+      }
       engine.executeSignal('buy')
       res.send('{"status":"OK"}')
     })
 
     app.post('/buyMarket', function (req, res) {
-      console.log('Buy by market: ')
+      console.log('Buy by market: \n')
+      if(!isBackFilled){
+        res.send('{"status":"Backfilling"}')
+        return
+      }
       engine.executeSignal('buy', null, null, false, true)
       res.send('{"status":"OK"}')
     })
 
     app.post('/sellLimit', function (req, res) {
-      console.log('Sell by Limit: ')
+      console.log('Sell by Limit: \n')
+      if(!isBackFilled){
+        res.send('{"status":"Backfilling"}')
+        return
+      }
       engine.executeSignal('sell')
       res.send('{"status":"OK"}')
     })
 
     app.post('/sellMarket', function (req, res) {
-      console.log('Sell by market: ')
+      console.log('Sell by market: \n')
+      if(!isBackFilled){
+        res.send('{"status":"Backfilling"}')
+        return
+      }
       engine.executeSignal('sell', null, null, false, true)
       res.send('{"status":"OK"}')
     })
 
     app.post('/stop', function (req, res) {
-      console.log('STOP signal from restapi')
-      
+      console.log('STOP signal from restapi\n')
+      if(!isBackFilled){
+        res.send('{"status":"Backfilling"}')
+        return
+      }
       res.send('{"status":"OK"}')
       process.exit(0)
     })
-
-
 
 
     app.listen(port, ip)

@@ -25,14 +25,6 @@ module.exports = function api () {
 
     var collectionServiceInstance = collectionService(conf)
 
-    app.get('/ready', function (req, res) {
-      console.log('Get trades:\n')
-      if(!isBackFilled){
-        res.send('{"status":"Backfilling"}')
-        return
-      }
-      res.send(trades)
-    })
 
 
     app.get('/trades', function (req, res) {
@@ -41,6 +33,7 @@ module.exports = function api () {
         res.send('{"status":"Backfilling"}')
         return
       }
+      var trades = collectionServiceInstance.getTrades()
       res.send(trades)
     })
 

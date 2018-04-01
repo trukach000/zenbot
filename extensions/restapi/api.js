@@ -6,7 +6,7 @@ module.exports = function api () {
 
   let run = function(conf ,reporter, tradeObject, engine) {
 
-    startServer(reporter.port, reporter.ip, tradeObject, engine)
+    startServer(conf, reporter.port, reporter.ip, tradeObject, engine)
     
   }
 

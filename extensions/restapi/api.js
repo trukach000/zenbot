@@ -43,7 +43,7 @@ module.exports = function api () {
     
     })
 
-    app.post('/status', function (req, res) {
+    app.get('/status', function (req, res) {
       console.log('Get status: \n');
       var response = {};
       if (isBackFilled){
@@ -52,7 +52,7 @@ module.exports = function api () {
 	  response.status = "OK";
       }
      
-      conf.configuration = conf;
+      response.configuration = conf;
       
       res.send(JSON.stringify(response));
     });

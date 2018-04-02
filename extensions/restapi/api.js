@@ -27,31 +27,35 @@ module.exports = function api () {
     var collectionServiceInstance = collectionService(conf)
 
 
-
-    app.get('/trades', function (req, res) {
-      console.log('Get trades:\n')
+    
+     app.get('/history', function (req, res) {
+      console.log('Get history:\n')
       if(!isBackFilled){
         res.send('{"status":"Backfilling"}')
         return
       }
       collectionServiceInstance.getMyTrades().find().toArray(
         function(e,docs){
-          console.log(util.inspect(docs, false, null))
+          //console.log(util.inspect(docs, false, null))
           res.send(JSON.stringify(docs))
         }
       );
     
     })
 
-    app.post('/buyLimit', function (req, res) {
-      console.log('Buy by Limit: \n')
-      if(!isBackFilled){
-        res.send('{"status":"Backfilling"}')
-        return
+    app.post('/status', function (req, res) {
+      console.log('Get status: \n');
+      var response = {};
+      if (isBackFilled){
+	  response.status = "Backfilling";
+      }else{
+	  response.status = "OK";
       }
-      engine.executeSignal('buy')
-      res.send('{"status":"OK"}')
-    })
+     
+      conf.configuration = conf;
+      
+      res.send(JSON.stringify(response));
+    });
 
     app.post('/buyMarket', function (req, res) {
       console.log('Buy by market: \n')

@@ -382,7 +382,7 @@ module.exports = function (program, conf) {
       var periods = collectionServiceInstance.getPeriods()
 
       var restApi = restapi(conf)
-      restApi.initializeRestApi(s,engine)
+      restApi.initializeRestApi(s,engine, so)
 
       console.log('fetching pre-roll data:')
       var zenbot_cmd = process.platform === 'win32' ? 'zenbot.bat' : 'zenbot.sh' // Use 'win32' for 64 bit windows too

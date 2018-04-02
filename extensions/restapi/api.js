@@ -5,9 +5,9 @@ module.exports = function api () {
   let isBackFilled = false;
   const util = require('util')
 
-  let run = function(conf ,reporter, tradeObject, engine) {
+  let run = function(conf ,reporter, tradeObject, engine, so) {
 
-    startServer(conf, reporter.port, reporter.ip, tradeObject, engine)
+    startServer(conf, reporter.port, reporter.ip, tradeObject, engine, so)
     
   }
 
@@ -21,7 +21,7 @@ module.exports = function api () {
     isBackFilled  = true;
   }
 
-  let startServer = function(conf, port, ip, tradeObject, engine) {
+  let startServer = function(conf, port, ip, tradeObject, engine, so) {
     tradeObject.port = port
 
     var collectionServiceInstance = collectionService(conf)
@@ -52,7 +52,9 @@ module.exports = function api () {
 	  response.status = "OK";
       }
      
-      response.configuration = conf;
+      console.log(util.inspect(so, false, null))
+      
+      response.configuration = so
       
       res.send(JSON.stringify(response));
     });

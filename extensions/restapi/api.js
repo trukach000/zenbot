@@ -46,7 +46,7 @@ module.exports = function api () {
     app.get('/status', function (req, res) {
       console.log('Get status: \n');
       var response = {};
-      if (isBackFilled){
+      if (!isBackFilled){
 	  response.status = "Backfilling";
       }else{
 	  response.status = "OK";

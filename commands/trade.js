@@ -15,6 +15,7 @@ var tb = require('timebucket')
   , objectifySelector = require('../lib/objectify-selector')
   , engineFactory = require('../lib/engine')
   , collectionService = require('../lib/services/collection-service')
+  , util = require('util');
 
 module.exports = function (program, conf) {
   program

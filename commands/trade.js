@@ -594,6 +594,7 @@ module.exports = function (program, conf) {
               b.buy_hold = s.period.close * (session.orig_capital / session.orig_price)
               b.buy_hold_profit = (b.buy_hold - session.orig_capital) / session.orig_capital
               b.vs_buy_hold = (b.consolidated - b.buy_hold) / b.buy_hold
+	      console.log("Sync balance");
               conf.output.api.on && printTrade(false, false, true)
               if (so.mode === 'live') {
                 balances.save(b, function (err) {

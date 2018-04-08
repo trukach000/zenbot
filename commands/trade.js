@@ -151,7 +151,7 @@ module.exports = function (program, conf) {
 
       /* Implementing statistical Exit */
       function printTrade (quit, dump, statsonly = false) {
-	console.log("printTrade\n");
+	    console.log("printTrade\n");
         var tmp_balance = n(s.balance.currency).add(n(s.period.close).multiply(s.balance.asset)).format('0.00000000')
         if (quit) {
           if (s.my_trades.length) {
@@ -596,7 +596,7 @@ module.exports = function (program, conf) {
               b.buy_hold_profit = (b.buy_hold - session.orig_capital) / session.orig_capital
               b.vs_buy_hold = (b.consolidated - b.buy_hold) / b.buy_hold
 	      console.log("Sync balance");
-	      console.log(util.inspect(s, false, null))
+	      //console.log(util.inspect(s, false, null))
               conf.output.api.on && printTrade(false, false, true)
               if (so.mode === 'live') {
                 balances.save(b, function (err) {

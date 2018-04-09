@@ -219,6 +219,12 @@ module.exports = function (program, conf) {
           })
         }
 	
+	let mes = {
+	    stats: s.stats,
+	    asset: s.asset,
+	    currency: s.currency
+	} 
+	
 	engine.pushMessageToWebSocket("stats",s.stats)
 	
         if (quit || dump) {

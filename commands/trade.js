@@ -218,6 +218,9 @@ module.exports = function (program, conf) {
             console.log(line)
           })
         }
+	
+	engine.pushMessageToWebSocket("stats",s.stats)
+	
         if (quit || dump) {
           var html_output = output_lines.map(function (line) {
             return colors.stripColors(line)

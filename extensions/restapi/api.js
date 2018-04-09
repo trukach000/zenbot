@@ -52,7 +52,7 @@ module.exports = function api () {
 	  response.status = "OK";
       }
      
-      console.log(util.inspect(so, false, null))
+      //console.log(util.inspect(so, false, null))
       
       response.configuration = so
       

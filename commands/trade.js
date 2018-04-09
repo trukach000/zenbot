@@ -222,7 +222,8 @@ module.exports = function (program, conf) {
 	let mes = {
 	    stats: s.stats,
 	    asset: s.asset,
-	    currency: s.currency
+	    currency: s.currency,
+	    my_trades_length: s.my_trades.length
 	} 
 	
 	engine.pushMessageToWebSocket("stats",mes)

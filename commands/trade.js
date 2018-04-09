@@ -225,7 +225,7 @@ module.exports = function (program, conf) {
 	    currency: s.currency
 	} 
 	
-	engine.pushMessageToWebSocket("stats",s.stats)
+	engine.pushMessageToWebSocket("stats",mes)
 	
         if (quit || dump) {
           var html_output = output_lines.map(function (line) {

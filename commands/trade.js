@@ -725,6 +725,7 @@ module.exports = function (program, conf) {
             })
           }
           else {
+	    console.log("No new trades from exchange!\n")  
             saveSession()
           }
         })

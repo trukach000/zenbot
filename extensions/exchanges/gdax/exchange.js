@@ -5,9 +5,10 @@ var Gdax = require('gdax'),
 var websocketApi
 
 module.exports = function gdax (conf) {
-  console.log("Conf in GDAX" + util.inspect(conf.websocketApiInstance, false, null)) 
   
   if (typeof conf.websocketApiInstance !== 'undefined' && conf.websocketApiInstance !== null){
+        console.log("Conf in GDAX" + util.inspect(conf.websocketApiInstance, false, null)) 
+
 	websocketApi = conf.websocketApiInstance
   }
   var so = minimist(process.argv)

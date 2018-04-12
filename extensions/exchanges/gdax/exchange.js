@@ -88,7 +88,9 @@ module.exports = function gdax (conf) {
           handleTrade(message, product_id)
           break
         case 'ticker':
-	  websocketApi.send('quote',message)
+	  if (typeof websocketApi !== 'undefined' && websocketApi !== null){
+	    websocketApi.send('quote',message)
+	  }
           handleTicker(message, product_id)
           break
         default:

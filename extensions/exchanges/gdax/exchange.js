@@ -90,6 +90,7 @@ module.exports = function gdax (conf) {
           handleTrade(message, product_id)
           break
         case 'ticker':
+	  console.log("\nGET ticker from GDAX!!!!!!!\n")  
 	  websocketApi.send('quote',message)
           handleTicker(message, product_id)
           break

@@ -100,7 +100,9 @@ module.exports = function gdax (conf) {
 	      ask: message.best_ask,
 	      bid: message.best_bid
 	  }
-	  websocketApi.send('quote',res)
+	  if (typeof conf.websocketApi !== 'undefined' && conf.websocketApi !== null){
+	      websocketApi.send('quote',res)
+	  }
           handleTicker(message, product_id)
           break
         default:
@@ -372,7 +374,7 @@ module.exports = function gdax (conf) {
 	      ask: body.ask,
 	      bid: body.bid
 	  }
-	  //websocketApi.send('quote',res)
+	  websocketApi.send('quote',res)
           cb(null, {bid: body.bid, ask: body.ask})
 	}else{
 	    cb({code: 'ENOTFOUND', body: opts.product_id + ' has no liquidity to quote'})

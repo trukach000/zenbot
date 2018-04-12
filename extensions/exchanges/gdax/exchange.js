@@ -4,8 +4,10 @@ var Gdax = require('gdax'),
 
 module.exports = function gdax (conf) {
   console.log("Conf in GDAX" + util.inspect(conf.websocketApiInstance, false, null)) 
-    
-  var websocketApi = conf.websocketApiInstance
+  var websocketApi
+  if (typeof conf.websocketApiInstance !== 'undefined' && conf.websocketApiInstance !== null){
+	websocketApi = conf.websocketApiInstance
+  }
   var so = minimist(process.argv)
   var public_client = {}, authed_client, websocket_client = {}, websocket_cache = {}
 
@@ -88,9 +90,7 @@ module.exports = function gdax (conf) {
           handleTrade(message, product_id)
           break
         case 'ticker':
-	  if (typeof websocketApi !== 'undefined' && websocketApi !== null){
-	    websocketApi.send('quote',message)
-	  }
+	  websocketApi.send('quote',message)
           handleTicker(message, product_id)
           break
         default:

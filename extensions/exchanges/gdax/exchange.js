@@ -60,7 +60,6 @@ module.exports = function gdax (conf) {
 
       websocket_client[product_id].on('message', (message) => {
         // all messages with user_id are related to trades for current authenticated user
-        websocketApi.send('gdax_message',message)
 
         if(message.user_id){
           //if (so.debug) {
@@ -85,6 +84,8 @@ module.exports = function gdax (conf) {
             break
           }
         }
+
+        websocketApi.send('gdax_message',message)
 
         switch (message.type) {
         case 'open':

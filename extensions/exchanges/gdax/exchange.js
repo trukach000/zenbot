@@ -2,6 +2,8 @@ var Gdax = require('gdax'),
   minimist = require('minimist')
 
 module.exports = function gdax (conf) {
+    
+  var websocketApi = conf.websocketApiInstance
   var so = minimist(process.argv)
   var public_client = {}, authed_client, websocket_client = {}, websocket_cache = {}
 
@@ -84,6 +86,7 @@ module.exports = function gdax (conf) {
           handleTrade(message, product_id)
           break
         case 'ticker':
+	  websocketApi.send('quote',message)
           handleTicker(message, product_id)
           break
         default:

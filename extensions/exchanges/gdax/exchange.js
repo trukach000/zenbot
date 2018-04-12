@@ -101,9 +101,8 @@ module.exports = function gdax (conf) {
 	      ask: message.best_ask,
 	      bid: message.best_bid
 	  }
-	  if (typeof conf.websocketApi !== 'undefined' && conf.websocketApi !== null){
-	      websocketApi.send('quote',res)
-	  }
+	  websocketApi.send('quote',res)
+	  
           handleTicker(message, product_id)
           break
         default:

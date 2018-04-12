@@ -57,12 +57,10 @@ module.exports = function gdax (conf) {
       websocket_client[product_id].on('message', (message) => {
         // all messages with user_id are related to trades for current authenticated user
         if(message.user_id){
-          //if (so.debug) {
+          if (so.debug) {
             console.log('websocket user channel income', message)
-          //}
-	  
-	  
-	  
+          }
+
           switch (message.type) {
           case 'open':
             handleOrderOpen(message, product_id)
@@ -364,16 +362,10 @@ module.exports = function gdax (conf) {
       client.getProductTicker(opts.product_id, function (err, resp, body) {
         if (!err) err = statusErr(resp, body)
         if (err) return retry('getQuote', func_args, err)
-        if (body.bid || body.ask){
-	   res = {
-	      ask: body.ask,
-	      bid: body.bid
-	  }
-	  websocketApi.send('quote',res)
+        if (body.bid || body.ask)
           cb(null, {bid: body.bid, ask: body.ask})
-	}else{
-	    cb({code: 'ENOTFOUND', body: opts.product_id + ' has no liquidity to quote'})
-	}
+        else
+          cb({code: 'ENOTFOUND', body: opts.product_id + ' has no liquidity to quote'})
       })
     },
 

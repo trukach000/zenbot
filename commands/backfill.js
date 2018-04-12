@@ -3,6 +3,8 @@ var tb = require('timebucket')
   , objectifySelector = require('../lib/objectify-selector')
   , collectionService = require('../lib/services/collection-service')
   , api_websocket = require('../lib/api_websocket.js')
+    , util = require('util')
+
 
 
 module.exports = function (program, conf) {

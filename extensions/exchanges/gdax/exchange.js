@@ -85,7 +85,9 @@ module.exports = function gdax (conf) {
           }
         }
 
-        websocketApi.send('gdax_message',message)
+	if (typeof conf.websocketApiInstance !== 'undefined' && conf.websocketApiInstance !== null){
+	    websocketApi.send('gdax_message',message)
+	}
 
         switch (message.type) {
         case 'open':
@@ -102,7 +104,9 @@ module.exports = function gdax (conf) {
 	      ask: message.best_ask,
 	      bid: message.best_bid
 	  }
-	  websocketApi.send('quote',res)
+	  if (typeof conf.websocketApiInstance !== 'undefined' && conf.websocketApiInstance !== null){
+	    websocketApi.send('quote',res)
+	  }
 	  
           handleTicker(message, product_id)
           break
@@ -376,7 +380,9 @@ module.exports = function gdax (conf) {
 	      bid: body.bid
 	  }
 	  //websocketApi.send('gdax_handle_request',body)
-	  websocketApi.send('quote',res)
+	  if (typeof conf.websocketApiInstance !== 'undefined' && conf.websocketApiInstance !== null){
+	    websocketApi.send('quote',res)
+	  }
           cb(null, {bid: body.bid, ask: body.ask})
 	}else{
 	    cb({code: 'ENOTFOUND', body: opts.product_id + ' has no liquidity to quote'})

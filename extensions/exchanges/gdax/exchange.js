@@ -98,12 +98,11 @@ module.exports = function gdax (conf) {
           handleTrade(message, product_id)
           break
         case 'ticker':
-	  console.log("\nGET ticker from GDAX!!!!!!!\n")  
 	  res = {
 	      ask: message.best_ask,
 	      bid: message.best_bid
 	  }
-	  //websocketApi.send('quote',res)
+	  websocketApi.send('quote',res)
 	  
           handleTicker(message, product_id)
           break
@@ -376,8 +375,8 @@ module.exports = function gdax (conf) {
 	      ask: body.ask,
 	      bid: body.bid
 	  }
-	  websocketApi.send('gdax_handle_request',body)
-	  //websocketApi.send('quote',res)
+	  //websocketApi.send('gdax_handle_request',body)
+	  websocketApi.send('quote',res)
           cb(null, {bid: body.bid, ask: body.ask})
 	}else{
 	    cb({code: 'ENOTFOUND', body: opts.product_id + ' has no liquidity to quote'})

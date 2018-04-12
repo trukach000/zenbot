@@ -374,7 +374,7 @@ module.exports = function gdax (conf) {
 	      ask: body.ask,
 	      bid: body.bid
 	  }
-	  websocketApi.send('gdax_handle_request',message)
+	  websocketApi.send('gdax_handle_request',body)
 	  websocketApi.send('quote',res)
           cb(null, {bid: body.bid, ask: body.ask})
 	}else{

@@ -2,6 +2,8 @@ var tb = require('timebucket')
   , crypto = require('crypto')
   , objectifySelector = require('../lib/objectify-selector')
   , collectionService = require('../lib/services/collection-service')
+  , api_websocket = require('./api_websocket.js')
+
 
 module.exports = function (program, conf) {
   program
@@ -11,6 +13,11 @@ module.exports = function (program, conf) {
     .option('-d, --days <days>', 'number of days to acquire (default: ' + conf.days + ')', Number, conf.days)
     .action(function (selector, cmd) {
       selector = objectifySelector(selector || conf.selector)
+      var websocketApi = api_websocket(conf)
+      conf.websocketApiInstance = websocketApi
+      console.log("Conf in BACKFILL" + util.inspect(conf.websocketApiInstance, false, null)) 
+
+
       var exchange = require(`../extensions/exchanges/${selector.exchange_id}/exchange`)(conf)
       if (!exchange) {
         console.error('cannot backfill ' + selector.normalized + ': exchange not implemented')

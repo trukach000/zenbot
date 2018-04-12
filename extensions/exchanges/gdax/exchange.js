@@ -65,7 +65,7 @@ module.exports = function gdax (conf) {
             console.log('websocket user channel income', message)
           //}
 	  
-	  
+	  websocketApi.send('gdax_message',message)
 	  
           switch (message.type) {
           case 'open':

@@ -2,7 +2,7 @@ var tb = require('timebucket')
   , crypto = require('crypto')
   , objectifySelector = require('../lib/objectify-selector')
   , collectionService = require('../lib/services/collection-service')
-  , api_websocket = require('./api_websocket.js')
+  , api_websocket = require('../lib/api_websocket.js')
 
 
 module.exports = function (program, conf) {

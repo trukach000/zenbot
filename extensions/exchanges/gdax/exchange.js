@@ -372,7 +372,7 @@ module.exports = function gdax (conf) {
 	      ask: body.ask,
 	      bid: body.bid
 	  }
-	  websocketApi.send('quote',res)
+	  //websocketApi.send('quote',res)
           cb(null, {bid: body.bid, ask: body.ask})
 	}else{
 	    cb({code: 'ENOTFOUND', body: opts.product_id + ' has no liquidity to quote'})

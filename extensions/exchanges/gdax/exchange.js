@@ -106,7 +106,7 @@ module.exports = function gdax (conf) {
           handleTrade(message, product_id)
           break
         case 'ticker':
-	  res = {
+	  let res = {
 	      ask: message.best_ask,
 	      bid: message.best_bid
 	  }

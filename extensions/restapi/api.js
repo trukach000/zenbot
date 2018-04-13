@@ -88,6 +88,15 @@ module.exports = function api () {
       engine.executeSignal('sell', null, null, false, true)
       res.send('{"status":"OK"}')
     })
+    
+    app.post('/stopTrading', function(req,res){
+	console.log('Stop trading: \n')
+	if(!isBackFilled){
+	    res.send('{"status":"Backfilling"}')
+	    return
+	}
+	engine.stopTrading()
+    })
 
     app.post('/stop', function (req, res) {
       console.log('STOP signal from restapi\n')

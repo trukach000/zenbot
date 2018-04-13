@@ -97,25 +97,30 @@ module.exports = function gdax (conf) {
         case 'change':
           break
         case 'match':
-	  let res = {
-	      trade: message
-	  }  
-	  if (typeof conf.websocketApiInstance !== 'undefined' && conf.websocketApiInstance !== null){
-	    websocketApi.send('trade',res)
+	  {  
+	    let res = {
+		trade: message
+	    }  
+	    if (typeof conf.websocketApiInstance !== 'undefined' && conf.websocketApiInstance !== null){
+	      websocketApi.send('trade',res)
+	    }
 	  }
           handleTrade(message, product_id)
           break
         case 'ticker':
-	  let res = {
-	      ask: message.best_ask,
-	      bid: message.best_bid
-	  }
-	  if (typeof conf.websocketApiInstance !== 'undefined' && conf.websocketApiInstance !== null){
-	    websocketApi.send('quote',res)
+	  {
+	    let res = {
+		ask: message.best_ask,
+		bid: message.best_bid
+	    }
+	    if (typeof conf.websocketApiInstance !== 'undefined' && conf.websocketApiInstance !== null){
+	      websocketApi.send('quote',res)
+	    }
 	  }
 	  
           handleTicker(message, product_id)
           break
+        
         default:
           break
         }

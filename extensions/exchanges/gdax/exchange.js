@@ -97,6 +97,12 @@ module.exports = function gdax (conf) {
         case 'change':
           break
         case 'match':
+	  let res = {
+	      trade: message
+	  }  
+	  if (typeof conf.websocketApiInstance !== 'undefined' && conf.websocketApiInstance !== null){
+	    websocketApi.send('trade',res)
+	  }
           handleTrade(message, product_id)
           break
         case 'ticker':

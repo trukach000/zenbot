@@ -40,6 +40,14 @@ module.exports = function api () {
     app.get('/trades', function (req, res) {
       res.send(objectWithoutKey(tradeObject, 'options'))
     })
+    
+    app.get('/botInfo', function (req, res) {
+      res.send(objectWithoutKey(
+	      objectWithoutKey(
+	      objectWithoutKey(tradeObject,'lookback')
+	,'trades')
+      , 'options'))
+    })
 
     app.get('/stats', function (req, res) {
       res.sendFile(path.join(__dirname+'../../../stats/index.html'))
